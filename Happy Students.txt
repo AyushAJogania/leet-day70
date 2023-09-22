@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int countWays(vector<int>& nums) {
+        sort(nums.begin() , nums.end());
+        
+        int ans = 0, n = nums.size() ;
+
+        // If no student is selcted 
+        // then the student having least value should be greater than 0 (No. of selected students = 0)
+        if(nums[0] > 0) ans++;
+        
+        for(int i = 0 ; i<nums.size()-1 ; i++){
+           // Let First i+1  students are selected 
+        // then the student having least value among the unselected students should be greater than i+1 
+        // and also 
+        // the student having highest value among the selected students should be less than i+1
+           if( nums[i] <  i+1 && nums[i+1] > i+1)
+               ans++;
+        }
+        
+        // If every student is selected 
+        // then the student having highest value should be less than n (No. of selected         students = n)
+        if(nums.back() < n) ans++;
+        
+        return ans;
+    }
+};
